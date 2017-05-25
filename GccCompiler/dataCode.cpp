@@ -34,6 +34,3 @@ int main() {freopen("data.txt", "w", stdout);
     }
     return 0;
 }
-
-
-

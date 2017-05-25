@@ -38,8 +38,10 @@ public class GccCompilar extends Application {
 	private final String BLUE = "-fx-text-fill: blue";
 	private final String YELLOW = "-fx-text-fill: yellow";
 
-	private final String GCC = "H:/CodeBlocks/MinGW/bin/mingw32-g++.exe ";
-
+	private final String GCC = "H:\\gcc\\bin\\mingw32-g++.exe ";
+//	private final String GCC = "H:/CodeBlocks/MinGW/bin/mingw32-g++.exe ";
+	
+	
 	private final String LOCALIN = "freopen(\"data.txt\", \"r\", stdin);";
 	private final String LOCALOUTMYCODE = "freopen(\"dataOutMyCode.txt\", \"w\", stdout);";
 	private final String LOCALOUTANSCODE = "freopen(\"dataOutAnsCode.txt\", \"w\", stdout);";
@@ -133,7 +135,7 @@ public class GccCompilar extends Application {
 				addString(strBufferAnsCode, LOCALIN);
 				saveToFile(strBufferAnsCode, ANSCODEFILENAME);
 				compilarFile(ANSCODEFILENAME, ANSCODEFILENAME + ".exe");
-				Thread.sleep(1500);
+//				Thread.sleep(1500);
 				
 				int cnt = 0;
 				textField.setText("正在运行第" + cnt + "次");
@@ -143,10 +145,11 @@ public class GccCompilar extends Application {
 					//一直寻找wa数据
 					System.out.println(cnt);
 					textField.setText("正在运行第" + cnt + "次");
-					Thread.sleep(1500);
+//					Thread.sleep(1500);
 					if (cnt >= 5) break;
 				}
 //				WA();
+				run("data.txt");
 				System.out.println("WA");
 //				run(DATACODEFILENAME);
 			} catch (IOException ex) {
@@ -190,7 +193,7 @@ public class GccCompilar extends Application {
 		run(DATACODEFILENAME + ".exe");
 		run(MYCODEFILENAME + ".exe");
 		run(ANSCODEFILENAME + ".exe");
-		Thread.sleep(2000);
+		Thread.sleep(1500);
 		if (!compareTwoFile("dataOutMyCode.txt", "dataOutAnsCode.txt")) {
 			return true;
 		} else {
@@ -229,8 +232,8 @@ public class GccCompilar extends Application {
 		}
 	}
 
-	public void compilarFile(String str, String res) throws IOException {
-		Runtime.getRuntime().exec(GCC + str + " -o " + res);
+	public void compilarFile(String codeName, String outPutFileName) throws IOException {
+		Runtime.getRuntime().exec(GCC + codeName + " -o " + outPutFileName);
 	}
 
 	public void run(String path) throws IOException { // /b可以不闪出黑框框
